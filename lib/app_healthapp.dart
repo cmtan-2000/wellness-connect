@@ -209,25 +209,26 @@ class _HealthAppState extends State<HealthApp> {
     final now = DateTime.now();
     final midnight = DateTime(now.year, now.month, now.day);
 
-    bool requested = await health.requestAuthorization([HealthDataType.STEPS]);
+    // bool requested = await health.requestAuthorization([HealthDataType.STEPS]);
 
-    if (requested) {
-      try {
-        steps = await health.getTotalStepsInInterval(midnight, now);
-      } catch (error) {
-        print("Caught exception in getTotalStepsInInterval: $error");
-      }
+    // if (requested) {
+    //   try {
+    steps = await health.getTotalStepsInInterval(midnight, now);
+    print(steps);
+    //   } catch (error) {
+    //     print("Caught exception in getTotalStepsInInterval: $error");
+    //   }
 
-      print('Total number of steps: $steps');
+    //   print('Total number of steps: $steps');
 
-      setState(() {
-        _nofSteps = (steps == null) ? 0 : steps;
-        _state = (steps == null) ? AppState.NO_DATA : AppState.STEPS_READY;
-      });
-    } else {
-      print("Authorization not granted - error in authorization");
-      setState(() => _state = AppState.DATA_NOT_FETCHED);
-    }
+    //   // setState(() {
+    //   //   _nofSteps = (steps == null) ? 0 : steps;
+    //   //   _state = (steps == null) ? AppState.NO_DATA : AppState.STEPS_READY;
+    //   // });
+    // } else {
+    //   print("Authorization not granted - error in authorization");
+    //   setState(() => _state = AppState.DATA_NOT_FETCHED);
+    // }
   }
 
   Future revokeAccess() async {
